@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sondeos\\source\\repos\\MudarT\\MudarT.csproj": {}
+    "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\MudarT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sondeos\\source\\repos\\MudarT\\MudarT.csproj": {
+    "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\MudarT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sondeos\\source\\repos\\MudarT\\MudarT.csproj",
+        "projectUniqueName": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\MudarT.csproj",
         "projectName": "MudarT",
-        "projectPath": "C:\\Users\\Sondeos\\source\\repos\\MudarT\\MudarT.csproj",
-        "packagesPath": "C:\\Users\\Sondeos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sondeos\\source\\repos\\MudarT\\obj\\",
+        "projectPath": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\MudarT.csproj",
+        "packagesPath": "C:\\Users\\joaqu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Sondeos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\joaqu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,9 +44,25 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
-              "version": "[5.1.1, )"
+              "version": "[5.1.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
             }
           },
           "imports": [
@@ -64,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
