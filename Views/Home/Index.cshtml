@@ -1,8 +1,245 @@
-﻿@{
+﻿@using MudarT.Extensions;
+@model ModelUsuario
+@{
     ViewData["Title"] = "Home Page";
+    var fechaHoy = DateTime.Now;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Header - set the background image for the header in the line below-->
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#!">MudaT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+
+                <li class="nav-item">
+                    <form method="post" asp-controller="Home" asp-action="LoginRedirect">
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header id="home" class="py-5 bg-image-full fondo-mudat">
+    <div class="text-center my-5 d-flex flex-column justify-content-center align-item-start">
+        <div class="logo-container">
+            <img class="img-fluid rounded-circle mb-4" src="~/images/MudaT-Icon-sinfondo.png" alt="Logo MudaT" />
+        </div>
+        <h1 class="text-dark fs-3 fw-bolder">Bienvenido a MudaT</h1>
+        <h2 class="text-dark-50 mb-0">@Model.nombre</h2>
+    </div>
+</header>
+<!-- Content section-->
+<section class="py-5">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2>Full Width Backgrounds</h2>
+                <p class="lead">A single, lightweight helper class allows you to add engaging, full width background images to sections of your page.</p>
+                <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Image element - set the background image for the header in the line below-->
+<div class="py-5 bg-image-full form-container">
+    <div class="row justify-content-center w-100">
+<div class="col-lg-6 d-flex flex-column justify-content-center align-item-start">
+            <h2 class="text-center">Comienza dandonos detalle de tu mudanza</h2>
+            <img class="img-form" src="~/images/MudaT-Icon-sinfondo.png" />
+        </div>
+        <div class="card-body w-25 form-principal m-5">
+            <form class="m-3">
+                <div class="m-2">
+                    <label for="exampleInputEmail1" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="mail"></ion-icon>Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" value="@Model.email" required>
+                </div>
+                <div class="m-2">
+                    <label for="dni" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="id-card"></ion-icon>DNI</label>
+                    <input type="number" class="form-control" id="dni" value="@Model.dni" required>
+                </div>
+                <div class="m-2">
+                    <label for="fecha_mudanza" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="calendar"></ion-icon>Fecha de la mudanza</label>
+                    <input type="date" class="form-control w-25" aria-describedby="fechaInfo" id="fecha_mudanza" min="@fechaHoy.AddDays(4).ToString("yyyy-MM-dd")" required>
+                    <div id="fechaInfo" class="form-text">La fecha de la mudanza debe ser al menos 4 días despues de realizado el pedido.</div>
+                </div>
+                <div class="m-2">
+                    <label for="tipo_vehiculo" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="car"></ion-icon>Tipo y cantidad de vehiculos</label>
+                    <div id="tipo1" class="mt-2">
+                        <label for="tipo_vehiculo1" class="form-label fw-bold">Vehiculo 1</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select m-1 w-50" id="tipo_vehiculo1" required>
+								<option selected disabled>Seleccione un vehiculo</option>
+							</select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad1" placeholder="Cantidad" min="0" required>
+                        </div>
+                    </div>
+                    <div id="tipo2" class="mt-2">
+                        <label for="tipo_vehiculo2" class="form-label fw-bold">Vehiculo 2</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select m-1 w-50" id="tipo_vehiculo2">
+								<option selected>-</option>
+							</select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad2" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="tipo3" class="mt-2">
+                        <label for="tipo_vehiculo3" class="form-label fw-bold">Vehiculo 3</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-control m-1 w-50" id="tipo_vehiculo3">
+                                <option selected>-</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad3" placeholder="Cantidad" min="0">
+                        </div>
+                                
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="calle_partida" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="home"></ion-icon>Dirección de partida</label>
+                    <div class="d-flex flex-direction-row">
+                        <input type="text" class="form-control w-50 m-1" id="calle_partida" placeholder="Dirección" required>
+                        <input type="number" class="form-control w-25 m-1" id="nro_partida" placeholder="Nro. casa" required>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="calle_destino" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="business"></ion-icon>Dirección de destino</label>
+                    <div class="d-flex flex-direction-row">
+                        <input type="text" class="form-control w-50 m-1" id="calle_destino" placeholder="Dirección" required>
+                        <input type="text" class="form-control w-25 m-1" id="nro_destino" placeholder="Nro. casa" required>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="tipo_extra1" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="add"></ion-icon>Extras</label>
+                    <div id="extra1" class="mt-2">
+                        <label for="tipo_extra1" class="form-label fw-bold">Extra 1</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra1">
+								<option selected disabled>Seleccione un extra</option>
+							</select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra1" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="extra2" class="mt-2">
+                        <label for="tipo_extra2" class="form-label fw-bold">Extra 2</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra2">
+								<option selected disabled>Seleccione un extra</option>
+							</select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra2" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="extra3" class="mt-2">
+                        <label for="tipo_extra3" class="form-label fw-bold">Extra 3</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra3">
+								<option selected disabled>Seleccione un extra</option>
+							</select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra3" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                </div>
+                            
+                <button type="submit" class="btn btn-success m-3 ">Generar total</button>
+            </form>
+        </div>
+    </div>
 </div>
+<!-- Content section-->
+<section class="py-5">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2>Engaging Background Images</h2>
+                <p class="lead">The background images used in this template are sourced from Unsplash and are open source and free to use.</p>
+                <p class="mb-0">I can't tell you how many people say they were turned off from science because of a science teacher that completely sucked out all the inspiration and enthusiasm they had for the course.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var tiposVehiculos;
+        var tiposExtras;
+
+        $.ajax({
+            url: "@Url.Action("TiposVehiculos","Home")",
+            type: "get",
+            dataType: "json",
+            data: "",
+            success: function (res) {
+                agregarVehiculos(res);
+            }
+        });
+
+        function agregarVehiculos(res){
+            var content = "";
+            var content1 = $("#tipo_vehiculo1").html();
+            var content2 = $("#tipo_vehiculo2").html();
+
+            for (var i = 0; i < res.length; i++){
+                content += "<option>"+ res[i].tipo +"</option>";
+            }
+            $("#tipo_vehiculo1").html(content1 + content);
+            $("#tipo_vehiculo2").html(content2 + content);
+            $("#tipo_vehiculo3").html(content2 + content);
+            tiposVehiculos = res;
+        }
+
+        $("#tipo2").hide();
+        $("#tipo3").hide();
+
+        $("#tipo_vehiculo1").change(function () {
+            $("#tipo2").show();
+        });
+
+        $("#tipo_vehiculo2").change(function () {
+            $("#tipo3").show();
+        });
+
+        $.ajax({
+            url: "@Url.Action("TiposExtras","Home")",
+            type: "get",
+            dataType: "json",
+            data: "",
+            success: function (res) {
+                agregarExtras(res);
+            }
+        });
+
+        function agregarExtras(res) {
+            var content = "<option selected>Sin extra</option>";
+            for (var i = 0; i < res.length; i++) {
+                content += "<option>" + res[i].e_descripcion + "</option>";
+            }
+            $("#tipo_extra1").html(content);
+            $("#tipo_extra2").html(content);
+            $("#tipo_extra3").html(content);
+            tiposExtras = res;
+        }
+
+        $("#extra2").hide();
+        $("#extra3").hide();
+
+        $("#tipo_extra1").change(function () {
+            $("#extra2").show();
+        });
+
+        $("#tipo_extra2").change(function () {
+            $("#extra3").show();
+        });
+    });
+
+
+
+</script>

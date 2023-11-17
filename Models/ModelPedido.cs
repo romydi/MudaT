@@ -11,5 +11,6 @@
         public DateTime direccion_destino { get; set; }
         public float total { get; set; }
         public string? estado { get; set; }
+        public int dni { get; set; }
     }
 }

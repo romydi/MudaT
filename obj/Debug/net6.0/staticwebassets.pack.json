@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\login.css"
     },
     {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\css\\registro.css",
+      "PackagePath": "staticwebassets\\css\\registro.css"
+    },
+    {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -17,8 +21,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Fondo-MudaT-2.jpg",
+      "PackagePath": "staticwebassets\\images\\Fondo-MudaT-2.jpg"
+    },
+    {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Fondo-MudarT.jpg",
       "PackagePath": "staticwebassets\\images\\Fondo-MudarT.jpg"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\FondoMudaT3.JPG",
+      "PackagePath": "staticwebassets\\images\\FondoMudaT3.JPG"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\MudaT-Icon-sinfondo.ico",
+      "PackagePath": "staticwebassets\\images\\MudaT-Icon-sinfondo.ico"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\MudaT-Icon-sinfondo.png",
+      "PackagePath": "staticwebassets\\images\\MudaT-Icon-sinfondo.png"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\jquery-3.7.1.js",
+      "PackagePath": "staticwebassets\\jquery-3.7.1.js"
     },
     {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\js\\site.js",

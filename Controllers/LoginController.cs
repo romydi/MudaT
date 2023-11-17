@@ -40,9 +40,16 @@ namespace MudarT.Controllers
         [HttpPost]
         public IActionResult Registro(ModelUsuario usuario)
         {
-
-
-            return View();
+            var res = usuarioDatos.Guardar(usuario);
+            if (res)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                ViewData["Mensaje"] = "usuario o contraseña incorrectos";
+                return View();
+            }
         }
     }
 }

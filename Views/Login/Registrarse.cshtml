@@ -19,12 +19,12 @@
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link href="~/css/login.css" rel="stylesheet" />
+	<link href="~/css/registro.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="container">
 		<div class="d-flex justify-content-center h-100">
-			<div class="card">
+			<div class="card card-container">
 				<div class="card-header">
 					<h3>Log In</h3>
 					<div class="d-flex justify-content-end social_icon">
@@ -34,22 +34,52 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<form action="@Url.Action("Acceso","Login")" method="post">
+					<form action="@Url.Action("Registro","Login")" method="post">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 							</div>
 							<input type="text" name="email" class="form-control" placeholder="Email">
-
 						</div>
+
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							<input type="password" name="contraseña" class="form-control" placeholder="Contraseña">
 						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><ion-icon name="person"></ion-icon></span>
+							</div>
+							<input type="text" name="nombre" class="form-control" placeholder="Nombre">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><ion-icon name="person"></ion-icon></span>
+							</div>
+							<input type="text" name="apellido" class="form-control" placeholder="Apellido">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><ion-icon name="home"></ion-icon></span>
+							</div>
+							<input type="text" name="direccion" class="form-control" placeholder="Dirección">
+						</div>
+
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><ion-icon name="id-card"></ion-icon></span>
+							</div>
+							<input type="number" name="dni" class="form-control" placeholder="DNI">
+						</div>
+
+
 						<div class="form-group">
-							<input type="submit" value="Login" class="btn float-right login_btn">
+							<input type="submit" value="Registrar" class="btn float-right login_btn">
 						</div>
 					</form>
 				</div>
@@ -63,5 +93,7 @@
 	</div>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
