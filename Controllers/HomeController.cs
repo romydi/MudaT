@@ -16,6 +16,7 @@ namespace MudarT.Controllers
         private UsuarioDatos usuarioDatos = new UsuarioDatos();
         private VehiculoDatos vehiculoDatos = new VehiculoDatos();
         private ExtrasDatos extrasDatos = new ExtrasDatos();
+        private PedidoDatos pedidoDatos = new PedidoDatos();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -32,6 +33,13 @@ namespace MudarT.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Reserva()
+        {
+            int id = HttpContext.Session.GetObject<int>("Usuario");
+            ModelUsuario user = usuarioDatos.Obtener(id);
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -75,6 +83,29 @@ namespace MudarT.Controllers
                 );
 
             return jsonString;
+        }
+
+        [HttpPost]
+        public IActionResult GuardarReserva([FromBody] ModelPedido pedido)
+        {
+            pedido.fecha_pedido = DateTime.Now.ToString("dd/MM/yyyy");
+            try
+            {
+                var res = pedidoDatos.Guardar(pedido);
+                if (res)
+                {
+                    return Json(new { mensaje = "Exito" });
+                }
+                else
+                {
+                    throw new Exception("Error");
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

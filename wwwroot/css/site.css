@@ -12439,11 +12439,21 @@ textarea.form-control-lg {
 .fondo-mudat{
     background-image: url("../images/Fondo-MudarT.jpg");
 }
+.fondo-reserva {
+    background-image: url("../images/Fondo-Reserva-banner.jpg");
+    height: 600px;
+}
 .form-container{
     background-image: url("../images/FondoMudaT3.JPG");
     background-repeat: no-repeat;
     background-size:100%;
     background-attachment:fixed;
+}
+.form-container-reserva {
+    background-image: url("../images/FondoMudaT3.JPG");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
 }
 .form-principal{
     background-color: rgb(157, 252, 238, 0.60);
@@ -12456,4 +12466,8 @@ textarea.form-control-lg {
     min-height: 200px;
     max-width: 500px;
     max-height: 500px;
+}
+
+.centrado{
+    margin: auto;
 }

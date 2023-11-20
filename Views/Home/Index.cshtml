@@ -9,12 +9,12 @@
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#!">MudaT</a>
+        <a class="navbar-brand" href="#home">MudaT</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Reserva", "Home")">Reserva</a></li>
 
                 <li class="nav-item">
                     <form method="post" asp-controller="Home" asp-action="LoginRedirect">
@@ -39,124 +39,36 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <h2>Full Width Backgrounds</h2>
-                <p class="lead">A single, lightweight helper class allows you to add engaging, full width background images to sections of your page.</p>
-                <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
+                <h2>Obtene un presupuesto para tu mudanza y reservala aca mismo!</h2>
+                <p class="lead">Desde nuestra pagina podras planear tu mudanza y te mostraremos el costo por hora de nuestros servicios para que puedas decidir si deseas hacer una reservacion o simplemente comprobar precios.</p>
+                <p class="mb-0">Si decides realizar una reserva, ésta se procesara luego de enviarse y le llegara un email con la confirmacion de la reserva y un link hacia las formas de pago.</p>
+                <p class="mb-0">Mas abajo encontraras detalles sobre nuestros vehiculos y extras que podras contratar.</p>
+                <p class="mb-0 text-primary"><ion-icon name="information-circle-outline"></ion-icon> Ten en cuenta que la reserva se debe hacer con, al menos, 7 dias de anticipacion, tambien podra elegir hasta 3 tipos de vehiculos y extras diferentes.</p>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-outline-primary btn-lg m-4 text-center" href="@Url.Action("Reserva", "Home")">Comienza ahora mismo</a>
+                </div>
+                
             </div>
         </div>
     </div>
 </section>
 <!-- Image element - set the background image for the header in the line below-->
 <div class="py-5 bg-image-full form-container">
-    <div class="row justify-content-center w-100">
-<div class="col-lg-6 d-flex flex-column justify-content-center align-item-start">
-            <h2 class="text-center">Comienza dandonos detalle de tu mudanza</h2>
-            <img class="img-form" src="~/images/MudaT-Icon-sinfondo.png" />
-        </div>
-        <div class="card-body w-25 form-principal m-5">
-            <form class="m-3">
-                <div class="m-2">
-                    <label for="exampleInputEmail1" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="mail"></ion-icon>Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" value="@Model.email" required>
-                </div>
-                <div class="m-2">
-                    <label for="dni" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="id-card"></ion-icon>DNI</label>
-                    <input type="number" class="form-control" id="dni" value="@Model.dni" required>
-                </div>
-                <div class="m-2">
-                    <label for="fecha_mudanza" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="calendar"></ion-icon>Fecha de la mudanza</label>
-                    <input type="date" class="form-control w-25" aria-describedby="fechaInfo" id="fecha_mudanza" min="@fechaHoy.AddDays(4).ToString("yyyy-MM-dd")" required>
-                    <div id="fechaInfo" class="form-text">La fecha de la mudanza debe ser al menos 4 días despues de realizado el pedido.</div>
-                </div>
-                <div class="m-2">
-                    <label for="tipo_vehiculo" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="car"></ion-icon>Tipo y cantidad de vehiculos</label>
-                    <div id="tipo1" class="mt-2">
-                        <label for="tipo_vehiculo1" class="form-label fw-bold">Vehiculo 1</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-select m-1 w-50" id="tipo_vehiculo1" required>
-								<option selected disabled>Seleccione un vehiculo</option>
-							</select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad1" placeholder="Cantidad" min="0" required>
-                        </div>
-                    </div>
-                    <div id="tipo2" class="mt-2">
-                        <label for="tipo_vehiculo2" class="form-label fw-bold">Vehiculo 2</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-select m-1 w-50" id="tipo_vehiculo2">
-								<option selected>-</option>
-							</select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad2" placeholder="Cantidad" min="0">
-                        </div>
-                    </div>
-                    <div id="tipo3" class="mt-2">
-                        <label for="tipo_vehiculo3" class="form-label fw-bold">Vehiculo 3</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-control m-1 w-50" id="tipo_vehiculo3">
-                                <option selected>-</option>
-                            </select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad3" placeholder="Cantidad" min="0">
-                        </div>
-                                
-                    </div>
-                </div>
-                <div class="m-2">
-                    <label for="calle_partida" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="home"></ion-icon>Dirección de partida</label>
-                    <div class="d-flex flex-direction-row">
-                        <input type="text" class="form-control w-50 m-1" id="calle_partida" placeholder="Dirección" required>
-                        <input type="number" class="form-control w-25 m-1" id="nro_partida" placeholder="Nro. casa" required>
-                    </div>
-                </div>
-                <div class="m-2">
-                    <label for="calle_destino" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="business"></ion-icon>Dirección de destino</label>
-                    <div class="d-flex flex-direction-row">
-                        <input type="text" class="form-control w-50 m-1" id="calle_destino" placeholder="Dirección" required>
-                        <input type="text" class="form-control w-25 m-1" id="nro_destino" placeholder="Nro. casa" required>
-                    </div>
-                </div>
-                <div class="m-2">
-                    <label for="tipo_extra1" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="add"></ion-icon>Extras</label>
-                    <div id="extra1" class="mt-2">
-                        <label for="tipo_extra1" class="form-label fw-bold">Extra 1</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-select w-50 m-1" id="tipo_extra1">
-								<option selected disabled>Seleccione un extra</option>
-							</select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra1" placeholder="Cantidad" min="0">
-                        </div>
-                    </div>
-                    <div id="extra2" class="mt-2">
-                        <label for="tipo_extra2" class="form-label fw-bold">Extra 2</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-select w-50 m-1" id="tipo_extra2">
-								<option selected disabled>Seleccione un extra</option>
-							</select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra2" placeholder="Cantidad" min="0">
-                        </div>
-                    </div>
-                    <div id="extra3" class="mt-2">
-                        <label for="tipo_extra3" class="form-label fw-bold">Extra 3</label>
-                        <div class="d-flex flex-direction-row">
-                            <select class="form-select w-50 m-1" id="tipo_extra3">
-								<option selected disabled>Seleccione un extra</option>
-							</select>
-                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra3" placeholder="Cantidad" min="0">
-                        </div>
-                    </div>
-                </div>
-                            
-                <button type="submit" class="btn btn-success m-3 ">Generar total</button>
-            </form>
-        </div>
+    <div id="cards-vehiculos" class="row justify-content-around flex-wrap w-100">
+        
     </div>
 </div>
 <!-- Content section-->
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h2>Engaging Background Images</h2>
-                <p class="lead">The background images used in this template are sourced from Unsplash and are open source and free to use.</p>
-                <p class="mb-0">I can't tell you how many people say they were turned off from science because of a science teacher that completely sucked out all the inspiration and enthusiasm they had for the course.</p>
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
+                <h2 class="text-center">Extras</h2>
+                <div class="centrado">
+                    <ul id="extras-info" class="list-group centrado">
+                        
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -171,6 +83,7 @@
     $(document).ready(function () {
         var tiposVehiculos;
         var tiposExtras;
+        var content = "";
 
         $.ajax({
             url: "@Url.Action("TiposVehiculos","Home")",
@@ -183,29 +96,9 @@
         });
 
         function agregarVehiculos(res){
-            var content = "";
-            var content1 = $("#tipo_vehiculo1").html();
-            var content2 = $("#tipo_vehiculo2").html();
-
-            for (var i = 0; i < res.length; i++){
-                content += "<option>"+ res[i].tipo +"</option>";
-            }
-            $("#tipo_vehiculo1").html(content1 + content);
-            $("#tipo_vehiculo2").html(content2 + content);
-            $("#tipo_vehiculo3").html(content2 + content);
             tiposVehiculos = res;
+            armarVehiculos(tiposVehiculos);
         }
-
-        $("#tipo2").hide();
-        $("#tipo3").hide();
-
-        $("#tipo_vehiculo1").change(function () {
-            $("#tipo2").show();
-        });
-
-        $("#tipo_vehiculo2").change(function () {
-            $("#tipo3").show();
-        });
 
         $.ajax({
             url: "@Url.Action("TiposExtras","Home")",
@@ -218,28 +111,49 @@
         });
 
         function agregarExtras(res) {
-            var content = "<option selected>Sin extra</option>";
-            for (var i = 0; i < res.length; i++) {
-                content += "<option>" + res[i].e_descripcion + "</option>";
-            }
-            $("#tipo_extra1").html(content);
-            $("#tipo_extra2").html(content);
-            $("#tipo_extra3").html(content);
             tiposExtras = res;
+            armarExtras(tiposExtras);
         }
 
-        $("#extra2").hide();
-        $("#extra3").hide();
+        function armarVehiculos(tiposVehiculos) {
+            var vehiculo;
+            for (var i = 0; i < tiposVehiculos.length; i++) {
+                vehiculo = tiposVehiculos[i];
+                content += "<div class='card w-25 m-3 bg-primary p-2 text-dark bg-opacity-50' >"
+                if (vehiculo.tipo === "Camion chico") {
+                    content += "<img src='" + '@Url.Content("~/images/Camion-Chico.jpg")' +"' class='card-img-top' alt = 'Camion chico' >";
+                }
+                if (vehiculo.tipo === "Camion mediano") {
+                    content += "<img src='" + '@Url.Content("~/images/Camion-Mediano.jpg")' + "' class='card-img-top' alt = 'Camion mediano' >";
+                }
+                if (vehiculo.tipo === "Camion grande") {
+                content += "<img src='" + '@Url.Content("~/images/Camion-Grande.jpg")' + "' class='card-img-top' alt = 'Camion grande' >";
+                }
+                
+                content += "<div class='card-body text-center' >";
+                content += "<h4 class='card-title text-white' > "+ vehiculo.tipo +" </h4>";
+                content += "<p class='card-text text-white' ><strong>Largo: </strong>" + vehiculo.largo + " mts</p>";
+                content += "<p class='card-text text-white' ><strong>Ancho: </strong>" + vehiculo.ancho + " mts</p>";
+                content += "<p class='card-text text-white' ><strong>Alto: </strong>" + vehiculo.alto + " mts</p>";
+                content += "<h4 class='card-text text-white'><strong>$" + new Intl.NumberFormat('de-DE').format(parseFloat(vehiculo.precio).toFixed(2)) + " x hs</strong></h4>"
+                content += "</div>";
+                content += "</div>";
+            }
 
-        $("#tipo_extra1").change(function () {
-            $("#extra2").show();
-        });
+            $("#cards-vehiculos").html(content);
+        }
 
-        $("#tipo_extra2").change(function () {
-            $("#extra3").show();
-        });
-    });
-
-
+        function armarExtras(extras){
+            var extra;
+            var contentExtra = "";
+            for (var i = 0; i < extras.length; i++){
+                extra=extras[i];
+                contentExtra += "<li class='list-group-item list-group-item-info'>";
+                contentExtra += "<p>" + extra.e_descripcion + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(extra.e_precio).toFixed(2)) + "</p>";
+                contentExtra += "</li>"
+            }
+            $("#extras-info").html(contentExtra);
+        }
+    }); 
 
 </script>

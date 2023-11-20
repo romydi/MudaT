@@ -1,4 +1,4 @@
-﻿
+﻿@model Boolean
 @{
     Layout = null;
 }
@@ -8,8 +8,8 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width" />
-	<title>Login</title>
-
+	<title>Registro</title>
+	<link rel="icon" type="image/x-icon" href="~/images/MudaT-Icon-sinfondo.ico" />
 	<!--Bootsrap 4 CDN-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -18,7 +18,7 @@
 
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link href="~/css/registro.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,12 +26,8 @@
 		<div class="d-flex justify-content-center h-100">
 			<div class="card card-container">
 				<div class="card-header">
-					<h3>Log In</h3>
-					<div class="d-flex justify-content-end social_icon">
-						<span><i class="fab fa-facebook-square"></i></span>
-						<span><i class="fab fa-google-plus-square"></i></span>
-						<span><i class="fab fa-twitter-square"></i></span>
-					</div>
+					<h3>Registrate</h3>
+
 				</div>
 				<div class="card-body">
 					<form action="@Url.Action("Registro","Login")" method="post">
@@ -39,42 +35,43 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 							</div>
-							<input type="text" name="email" class="form-control" placeholder="Email">
+							<input id="email" type="text" name="email" class="form-control" placeholder="Email" required>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name="contraseña" class="form-control" placeholder="Contraseña">
+							<input id="pass" type="password" name="contraseña" aria-describedby="passInfo" class="form-control" placeholder="Contraseña" required>
+							<div id="passInfo" class="form-text text-white">La contraseña debe tener al menos 4 caracteres o números.</div>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><ion-icon name="person"></ion-icon></span>
 							</div>
-							<input type="text" name="nombre" class="form-control" placeholder="Nombre">
+							<input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" required>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><ion-icon name="person"></ion-icon></span>
 							</div>
-							<input type="text" name="apellido" class="form-control" placeholder="Apellido">
+							<input id="apellido" type="text" name="apellido" class="form-control" placeholder="Apellido" required>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><ion-icon name="home"></ion-icon></span>
 							</div>
-							<input type="text" name="direccion" class="form-control" placeholder="Dirección">
+							<input id="direccion" type="text" name="direccion" class="form-control" placeholder="Dirección" required>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><ion-icon name="id-card"></ion-icon></span>
 							</div>
-							<input type="number" name="dni" class="form-control" placeholder="DNI">
+							<input id="dni" type="number" name="dni" class="form-control" placeholder="DNI" min="1" required>
 						</div>
 
 
@@ -83,17 +80,97 @@
 						</div>
 					</form>
 				</div>
+				@if (Model)
+				{
+					<div class="alert alert-danger alert-dismissible fade show m-1 text-bg-danger" role="alert">
+						<strong>Error!</strong> Campos incorrectos, completelos correctamente por favor.
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				}
 				<div class="card-footer">
 					<div class="d-flex justify-content-center links">
-						Ya tienes una cuenta?<a href="@Url.Action("Login", "Login")">Entra con tu cuenta</a>
+						Ya tienes una cuenta?<a href="@Url.Action("Login", "Login")" class="text-warning">Entra con tu cuenta</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script src="~/lib/jquery/dist/jquery.js"></script>
+	<script>
+		$(document).ready(function () {
+			console.log("Hola");
+			$("#email").on("change", function () {
+				var email = $("#email").val();
+				if (email != "" && email.indexOf("@@") >= 0 && email.indexOf(".") >= 0) {
+					$("#email").addClass("is-valid");
+					$("#email").removeClass("is-invalid");
+				}else{
+					$("#email").addClass("is-invalid");
+					$("#email").removeClass("is-valid");
+				}
+			});
+
+			$("#pass").on("change", function () {
+				var aux = $("#pass").val();
+				if (aux != "") {
+					$("#pass").addClass("is-valid");
+					$("#pass").removeClass("is-invalid");
+				} else {
+					$("#pass").addClass("is-invalid");
+					$("#pass").removeClass("is-valid");
+				}
+			});
+
+			$("#nombre").on("change", function () {
+				var aux = $("#nombre").val();
+				if (aux != "") {
+					$("#nombre").addClass("is-valid");
+					$("#nombre").removeClass("is-invalid");
+				} else {
+					$("#nombre").addClass("is-invalid");
+					$("#nombre").removeClass("is-valid");
+				}
+			});
+
+			$("#apellido").on("change", function () {
+				var aux = $("#apellido").val();
+				if (aux != "") {
+					$("#apellido").addClass("is-valid");
+					$("#apellido").removeClass("is-invalid");
+				} else {
+					$("#apellido").addClass("is-invalid");
+					$("#apellido").removeClass("is-valid");
+				}
+			});
+
+			$("#direccion").on("change", function () {
+				var aux = $("#direccion").val();
+				if (aux != "") {
+					$("#direccion").addClass("is-valid");
+					$("#direccion").removeClass("is-invalid");
+				} else {
+					$("#direccion").addClass("is-invalid");
+					$("#direccion").removeClass("is-valid");
+				}
+			});
+
+			$("#dni").on("change", function () {
+				var aux = $("#dni").val();
+				if (aux != "") {
+					$("#dni").addClass("is-valid");
+					$("#dni").removeClass("is-invalid");
+				} else {
+					$("#dni").addClass("is-invalid");
+					$("#dni").removeClass("is-valid");
+				}
+			});
+
+		});
+
+	</script>
 </body>
 </html>

@@ -1,0 +1,763 @@
+﻿@using MudarT.Extensions;
+@model ModelUsuario
+@{
+    ViewData["Title"] = "Home Page";
+    var fechaHoy = DateTime.Now;
+}
+
+@{
+    ViewData["Title"] = "Reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#home">MudaT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Reserva</a></li>
+                <li class="nav-item">
+                    <form method="post" asp-controller="Home" asp-action="LoginRedirect">
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header id="home" class="py-5 bg-image-full fondo-reserva">
+    <div class="text-center my-5 d-flex flex-column justify-content-center align-item-start">
+        <div class="logo-container">
+            <img class="img-fluid rounded-circle mb-4" src="~/images/MudaT-Icon-sinfondo.png" alt="Logo MudaT" />
+        </div>
+        <h1 class="text-dark fs-3 fw-bolder">Gracias por elegirnos para tu mudanza</h1>
+        <h2 class="text-dark-50 mb-0">@Model.nombre</h2>
+    </div>
+</header>
+<!-- Content section-->
+<section class="py-5">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2>Comienza dandonos detalles sobre tu mudanza</h2>
+                <p class="lead">Mas abajo encontraras un formulario para llenar con tus datos y generar un presupuesto para tu mudanza.</p>
+                <p>Podes leer mas informacion sobre la reserva <a href="#info-reserva">aquí</a></p>
+                <p class="mb-0 text-primary"><ion-icon name="information-circle-outline"></ion-icon> Ten en cuenta que se podra elegir hasta 3 tipos de vehiculos y extras diferentes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Image element - set the background image for the header in the line below-->
+<div class="py-5 bg-image-full form-container-reserva">
+    <div class="row justify-content-center w-100">
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-item-start">
+            <h2 class="text-center"></h2>
+            <img class="img-form" src="~/images/MudaT-Icon-sinfondo.png" />
+        </div>
+        <div class="card-body w-25 form-principal m-5">
+            <form id="datos-mudanza" class="m-3" novalidate>
+
+                <div class="m-2">
+                    <label for="user-email" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="mail"></ion-icon>Email</label>
+                    <input type="email" class="form-control" id="user-email" value="@Model.email" required>
+                    <div class="invalid-feedback">
+                        Por favor ingrese un email valido.
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <label for="dni" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="id-card"></ion-icon>DNI</label>
+                    <input type="number" class="form-control" id="dni" value="@Model.dni" required>
+                    <div class="invalid-feedback">
+                        Por favor ingrese un DNI valido.
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <label for="fecha_mudanza" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="calendar"></ion-icon>Fecha de la mudanza</label>
+                    <input type="date" class="form-control w-25" aria-describedby="fechaInfo" id="fecha_mudanza" min="@fechaHoy.AddDays(7).ToString("yyyy-MM-dd")" required>
+                    <div id="fechaInfo" class="form-text">La fecha de la mudanza debe ser al menos 7 días despues de realizado el pedido.</div>
+                    <div class="invalid-feedback">
+                        Ingrese una fecha valida.
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <label for="calle_partida" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="home"></ion-icon>Dirección de partida</label>
+                    <div class="d-flex flex-direction-row">
+                        <input type="text" class="form-control w-50 m-1" id="calle_partida" placeholder="Dirección" required>
+                        <input type="number" class="form-control w-25 m-1" id="nro_partida" placeholder="Nro. casa" required>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="calle_destino" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="business"></ion-icon>Dirección de destino</label>
+                    <div class="d-flex flex-direction-row">
+                        <input type="text" class="form-control w-50 m-1" id="calle_destino" placeholder="Dirección" required>
+                        <input type="number" class="form-control w-25 m-1" id="nro_destino" placeholder="Nro. casa" required>
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <label for="tipo_vehiculo" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="car"></ion-icon>Tipo y cantidad de vehiculos</label>
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item border-1 border-primary">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <ion-icon name="information-circle-outline"></ion-icon> Disponibilidad de vehiculos actual
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse">
+                                <div id="disponibilidad" class="accordion-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tipo1" class="mt-2">
+                        <label for="tipo_vehiculo1" class="form-label fw-bold">Vehiculo 1</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select m-1 w-50" id="tipo_vehiculo1" required>
+                                <option selected disabled>Seleccione un vehiculo</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad1" placeholder="Cantidad" min="0" required>
+                        </div>
+                    </div>
+                    <div id="tipo2" class="mt-2">
+                        <label for="tipo_vehiculo2" class="form-label fw-bold">Vehiculo 2</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select m-1 w-50" id="tipo_vehiculo2">
+                                <option selected>-</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad2" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="tipo3" class="mt-2">
+                        <label for="tipo_vehiculo3" class="form-label fw-bold">Vehiculo 3</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-control m-1 w-50" id="tipo_vehiculo3">
+                                <option selected>-</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad3" placeholder="Cantidad" min="0">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="m-2">
+                    <label for="tipo_extra1" class="form-label fs-6 fw-bold text-decoration-underline"><ion-icon name="add"></ion-icon>Extras</label>
+                    <div class="accordion" id="accordionExtra">
+                        <div class="accordion-item border-1 border-primary">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExtras" aria-expanded="false" aria-controls="collapseExtras">
+                                    <ion-icon name="information-circle-outline"></ion-icon> Disponibilidad de extras actual
+                                </button>
+                            </h2>
+                            <div id="collapseExtras" class="accordion-collapse collapse">
+                                <div id="disponibilidad_extras" class="accordion-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="extra1" class="mt-2">
+                        <label for="tipo_extra1" class="form-label fw-bold">Extra 1</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra1">
+                                <option selected disabled>Seleccione un extra</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra1" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="extra2" class="mt-2">
+                        <label for="tipo_extra2" class="form-label fw-bold">Extra 2</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra2">
+                                <option selected disabled>Seleccione un extra</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra2" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                    <div id="extra3" class="mt-2">
+                        <label for="tipo_extra3" class="form-label fw-bold">Extra 3</label>
+                        <div class="d-flex flex-direction-row">
+                            <select class="form-select w-50 m-1" id="tipo_extra3">
+                                <option selected disabled>Seleccione un extra</option>
+                            </select>
+                            <input type="number" class="form-control w-25 m-1" id="cantidad_extra3" placeholder="Cantidad" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-total" type="button" class="btn btn-success m-3">Generar total</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Content section-->
+<section class="py-5">
+    <div id="info-reserva" class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2>Luego de realizada la reserva</h2>
+                <p class="lead">Acordate que dentro de las 24hs siguientes a realizada la reserva se estara enviando un email con la confirmacion de los datos y un link para ingresar el pago de la primer hora de servicio.</p>
+                <p class="mb-0">El pago se debe realizar antes de las 48hs previas a la mudanza, si no se dara como cancelada. Ademas se cobrara, al final de la mudanza, las horas extras utilizadas en caso de que sea necesario.</p>
+                <h3>Muchas gracias por usar nuestro servicio!</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal generar total -->
+<div class="modal fade" id="total" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-bg-success">
+                <h1 class="modal-title fs-5 text-white" id="staticBackdropLabel">Confirmar reserva</h1>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="confirmarReserva" class="modal-body d-flex flex-row flex-wrap">
+                <div id="reservaPrecios" class="w-50">
+
+                </div>
+                <div id="reservaDatos" class="w-50">
+
+                </div>
+                <div id="reservaTotal">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                <button id="btn-confirmar" type="button" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal error campos -->
+<div class="modal fade" id="errorCampos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Error</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Por favor complete los campos requeridos correctamente.
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal error reserva -->
+<div class="modal fade" id="errorReserva" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Error</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ha ocurrido un error al guardar la reserva, por favor intente otra vez mas tarde.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal reserva exitosa -->
+<div class="modal fade" id="reservaExitosa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Reserva exitosa!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Dentro de las proximas 24hs recibira un email con mas informacion para el pago de la primer hora.</p>
+                <p>Podes leer mas informacion sobre la reserva <a id="masInfo" href="#info-reserva">aquí</a></p>
+                <h3 class="text-center">¡Muchas gracias por elegirnos!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var tiposVehiculos;
+        var tiposExtras;
+        var fechaInput = $("#fecha_mudanza");
+        var totalFinal = 0.0;
+
+        fechaInput.on("keydown", function () {
+            event.preventDefault();
+        });
+
+        $.ajax({
+            url: "@Url.Action("TiposVehiculos","Home")",
+            type: "get",
+            dataType: "json",
+            data: "",
+            success: function (res) {
+                agregarVehiculos(res);
+            }
+        });
+
+        function agregarVehiculos(res) {
+            var content = "";
+            var content1 = $("#tipo_vehiculo1").html();
+            var content2 = $("#tipo_vehiculo2").html();
+            var disponible = "";
+
+            for (var i = 0; i < res.length; i++) {
+                content += "<option>" + res[i].tipo + "</option>";
+                disponible += "<p class='mb - 0 fs - 6'>" + res[i].tipo + ": <strong>" + (res[i].cantidad - res[i].reservados) + "</strong></p>"
+            }
+            $("#tipo_vehiculo1").html(content1 + content);
+            $("#tipo_vehiculo2").html(content2 + content);
+            $("#tipo_vehiculo3").html(content2 + content);
+            $("#disponibilidad").html(disponible);
+            tiposVehiculos = res;
+        }
+
+        $("#tipo2").hide();
+        $("#tipo3").hide();
+
+        $("#tipo_vehiculo1").change(function () {
+            $("#tipo2").show();
+        });
+
+        $("#tipo_vehiculo2").change(function () {
+            $("#tipo3").show();
+        });
+
+        $.ajax({
+            url: "@Url.Action("TiposExtras","Home")",
+            type: "get",
+            dataType: "json",
+            data: "",
+            success: function (res) {
+                agregarExtras(res);
+            }
+        });
+
+        function agregarExtras(res) {
+            var content = "<option selected>Sin extra</option>";
+            var disponible = "";
+            for (var i = 0; i < res.length; i++) {
+                content += "<option>" + res[i].e_descripcion + "</option>";
+                disponible += "<p class='mb - 0 fs - 6'>" + res[i].e_descripcion + ": <strong>" + res[i].e_cantidad + "</strong></p>"
+            }
+            $("#tipo_extra1").html(content);
+            $("#tipo_extra2").html(content);
+            $("#tipo_extra3").html(content);
+            $("#disponibilidad_extras").html(disponible);
+            tiposExtras = res;
+        }
+
+        $("#extra2").hide();
+        $("#extra3").hide();
+
+        $("#tipo_extra1").change(function () {
+            $("#extra2").show();
+        });
+
+        $("#tipo_extra2").change(function () {
+            $("#extra3").show();
+        });
+
+
+
+
+
+        $("#btn-total").on("click", function (event) {
+            if(validarCampos()){
+                rellenarModalReservaPrecios();
+                rellenarModalReservaDatos();
+                $("#total").modal("show");
+            }else{
+                $("#errorCampos").modal("show");
+            }
+        });
+
+        function validarCampos() {
+            var validate = true;
+            var email = $("#user-email").val();
+            var dni = $("#dni").val();
+            var fecha = $("#fecha_mudanza").val();
+            var vehiculo1 = $("#tipo_vehiculo1").val();
+            var vehiculo2 = $("#tipo_vehiculo2").val();
+            var vehiculo3 = $("#tipo_vehiculo3").val();
+            var callePartida = $("#calle_partida").val();
+            var nroPartida = $("#nro_partida").val();
+            var calleDestino = $("#calle_destino").val();
+            var nroDestino = $("#nro_destino").val();
+            var extra1 = $("#tipo_extra1").val();
+            var extra2 = $("#tipo_extra2").val();
+            var extra3 = $("#tipo_extra3").val();
+
+            if (email != "" && email.indexOf("@@") >= 0  ){
+                $("#user-email").addClass("is-valid");
+                $("#user-email").removeClass("is-invalid");
+            }else{
+                $("#user-email").addClass("is-invalid");
+                $("#user-email").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (dni != "" && dni >= 0) {
+                $("#dni").addClass("is-valid");
+                $("#dni").removeClass("is-invalid");
+            } else {
+                $("#dni").addClass("is-invalid");
+                $("#dni").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (fecha != "") {
+                $("#fecha_mudanza").addClass("is-valid");
+                $("#fecha_mudanza").removeClass("is-invalid");
+            } else {
+                $("#fecha_mudanza").addClass("is-invalid");
+                $("#fecha_mudanza").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (vehiculo1 != null) {
+                $("#tipo_vehiculo1").addClass("is-valid");
+                $("#tipo_vehiculo1").removeClass("is-invalid");
+                if( !comprobarDisponible(vehiculo1, "cantidad1") ){
+                    validate = false;
+                }
+            } else {
+                $("#tipo_vehiculo1").addClass("is-invalid");
+                $("#tipo_vehiculo1").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (vehiculo2 != "-") {
+                $("#tipo_vehiculo2").addClass("is-valid");
+                $("#tipo_vehiculo2").removeClass("is-invalid");
+                if (!comprobarDisponible(vehiculo2, "cantidad2")) {
+                    validate = false;
+                }
+            }else{
+                $("#cantidad2").addClass("is-valid");
+                $("#cantidad2").removeClass("is-invalid");
+            }
+
+            if (vehiculo3 != "-") {
+                $("#tipo_vehiculo3").addClass("is-valid");
+                $("#tipo_vehiculo3").removeClass("is-invalid");
+                if (!comprobarDisponible(vehiculo3, "cantidad3")) {
+                    validate = false;
+                }
+            } else {
+                $("#cantidad3").addClass("is-valid");
+                $("#cantidad3").removeClass("is-invalid");
+            }
+
+            if (callePartida != "") {
+                $("#calle_partida").addClass("is-valid");
+                $("#calle_partida").removeClass("is-invalid");
+            } else {
+                $("#calle_partida").addClass("is-invalid");
+                $("#calle_partida").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (nroPartida != "" && nroPartida > 0) {
+                $("#nro_partida").addClass("is-valid");
+                $("#nro_partida").removeClass("is-invalid");
+            } else {
+                $("#nro_partida").addClass("is-invalid");
+                $("#nro_partida").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (calleDestino != "") {
+                $("#calle_destino").addClass("is-valid");
+                $("#calle_destino").removeClass("is-invalid");
+            } else {
+                $("#calle_destino").addClass("is-invalid");
+                $("#calle_destino").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (nroDestino != "" && nroDestino > 0) {
+                $("#nro_destino").addClass("is-valid");
+                $("#nro_destino").removeClass("is-invalid");
+            } else {
+                $("#nro_destino").addClass("is-invalid");
+                $("#nro_destino").removeClass("is-valid");
+                validate = false;
+            }
+
+            if (extra1 != "Sin extra") {
+                $("#tipo_extra1").addClass("is-valid");
+                $("#tipo_extra1").removeClass("is-invalid");
+                if (!comprobarExtras(extra1, "cantidad_extra1")) {
+                    validate = false;
+                }
+            } else {
+                $("#cantidad_extra1").addClass("is-valid");
+                $("#cantidad_extra1").removeClass("is-invalid");
+            }
+
+            if (extra2 != "Sin extra") {
+                $("#tipo_extra2").addClass("is-valid");
+                $("#tipo_extra2").removeClass("is-invalid");
+                if (!comprobarExtras(extra2, "cantidad_extra2")) {
+                    validate = false;
+                }
+            } else {
+                $("#cantidad_extra2").addClass("is-valid");
+                $("#cantidad_extra2").removeClass("is-invalid");
+            }
+
+            if (extra3 != "Sin extra") {
+                $("#tipo_extra3").addClass("is-valid");
+                $("#tipo_extra3").removeClass("is-invalid");
+                if (!comprobarExtras(extra3, "cantidad_extra3")) {
+                    validate = false;
+                }
+            } else {
+                $("#cantidad_extra3").addClass("is-valid");
+                $("#cantidad_extra3").removeClass("is-invalid");
+            }
+
+            return validate;
+        }
+
+        function comprobarDisponible(vehiculo, cant){
+            var truck = tiposVehiculos.find( (x) => x.tipo === vehiculo);
+            var disponible = truck.cantidad - truck.reservados;
+            var cantidad = $(`#${cant}`).val();
+            if(cantidad != "" && cantidad>0 && cantidad<=disponible){
+                $(`#${cant}`).addClass("is-valid");
+                $(`#${cant}`).removeClass("is-invalid");
+                return true;
+            }else{
+                $(`#${cant}`).addClass("is-invalid");
+                $(`#${cant}`).removeClass("is-valid");
+                return false;
+            }
+        }
+
+        function comprobarExtras(extra, cant) {
+            var extraData = tiposExtras.find((x) => x.e_descripcion === extra);
+            var disponible = extraData.e_cantidad;
+            var cantidad = $(`#${cant}`).val();
+
+            if (cantidad!="" && cantidad>0 && cantidad<=disponible) {
+                
+                $(`#${cant}`).addClass("is-valid");
+                $(`#${cant}`).removeClass("is-invalid");
+                return true;
+            } else {
+                $(`#${cant}`).addClass("is-invalid");
+                $(`#${cant}`).removeClass("is-valid");
+                return false;
+            }
+        }
+
+        function rellenarModalReservaPrecios(){
+            var total = 0.0;
+            var content = "";
+            var totalContent = "";
+            var precio = 0.0;
+
+            var vehiculo1 = $("#tipo_vehiculo1").val();
+            var cantidad1 = $("#cantidad1").val();
+
+            var vehiculo2 = $("#tipo_vehiculo2").val();
+            var cantidad2 = $("#cantidad2").val();
+
+            var vehiculo3 = $("#tipo_vehiculo3").val();
+            var cantidad3 = $("#cantidad3").val();
+
+            var extra1 = $("#tipo_extra1").val();
+            var cantidad_extra1 = $("#cantidad_extra1").val();
+
+            var extra2 = $("#tipo_extra2").val();
+            var cantidad_extra2 = $("#cantidad_extra2").val();
+
+            var extra3 = $("#tipo_extra3").val();
+            var cantidad_extra3 = $("#cantidad_extra3").val();
+
+            content += "<h4>Vehiculo 1</h4>";
+            precio = tiposVehiculos.find((x) => x.tipo === vehiculo1).precio;
+            content += "<p>"+ vehiculo1 +" - $"+ new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + " x " + cantidad1 + "</p>";
+            total += precio * cantidad1;
+            if(vehiculo2!="-"){
+                content += "<h4>Vehiculo 2</h4>";
+                precio = tiposVehiculos.find((x) => x.tipo === vehiculo2).precio;
+                content += "<p>" + vehiculo2 + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + " x " + cantidad2 + "</p>";
+                total += precio * cantidad2;
+            }
+            if (vehiculo3 != "-") {
+                content += "<h4>Vehiculo 3</h4>";
+                precio = tiposVehiculos.find((x) => x.tipo === vehiculo3).precio;
+                content += "<p>" + vehiculo3 + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + "x" + cantidad3 + "</p>";
+                total += precio * cantidad3;
+            }
+
+            if(extra1 != "Sin extra"){
+                content += "<h4>Extra 1</h4>";
+                precio = tiposExtras.find((x) => x.e_descripcion === extra1).e_precio;
+                content += "<p>" + extra1 + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + " x " + cantidad_extra1 + "</p>";
+                total += precio * cantidad_extra1;
+            }
+
+            if(extra2 != "Sin extra"){
+                content += "<h4>Extra 2</h4>";
+                precio = tiposExtras.find((x) => x.e_descripcion === extra2).e_precio;
+                content += "<p>" + extra2 + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + " x " + cantidad_extra2 + "</p>";
+                total += precio * cantidad_extra2;
+            }
+
+            if (extra3 != "Sin extra") {
+                content += "<h4>Extra 3</h4>";
+                precio = tiposExtras.find((x) => x.e_descripcion === extra3).e_precio;
+                content += "<p>" + extra3 + " - $" + new Intl.NumberFormat('de-DE').format(parseFloat(precio).toFixed(2)) + " x " + cantidad_extra3 + "</p>";
+                total += precio * cantidad_extra3;
+            }
+            totalFinal = total;
+
+            totalContent += "<h3>$" + new Intl.NumberFormat('de-DE').format(parseFloat(total).toFixed(2)) + "</h3>";
+            totalContent += "<p class='text-primary'> <ion-icon name='information-circle-outline'> </ion-icon> Acordate que este es el total por hora. Se deberá pagar el equivalente a las horas finales consumidas el día de la mudanza.</p> "
+
+            $("#reservaPrecios").html(content);
+            $("#reservaTotal").html(totalContent);
+        }
+
+        function rellenarModalReservaDatos(){
+            var content = "";
+
+            var email = $("#user-email").val();
+            var dni = $("#dni").val();
+            var fecha = $("#fecha_mudanza").val();
+            var direccion_p = $("#calle_partida").val();
+            var nro_p = $("#nro_partida").val();
+            var direccion_d = $("#calle_destino").val();
+            var nro_d = $("#nro_destino").val();
+
+            content += "<h4>Email</h4>";
+            content += "<p>"+ email +"</p>";
+
+            content += "<h4>dni</h4>";
+            content += "<p>"+ dni +"</p>";
+
+            content += "<h4>Fecha</h4>";
+            content += "<p>"+ fecha +"</p>";
+
+            content += "<h4>Partida</h4>";
+            content += "<p>"+ direccion_p +" Nro. "+ nro_p +"</p>";
+
+            content += "<h4>Destino</h4>";
+            content += "<p>" + direccion_d + " Nro. " + nro_d + "</p>";
+
+            $("#reservaDatos").html(content);
+        }
+
+        $("#btn-confirmar").click(function () {
+            $("#total").modal("hide");
+            console.log(armarJson());
+
+            $.ajax({
+                url: "@Url.Action("GuardarReserva","Home")",
+                type: "post",
+                data: JSON.stringify(armarJson()),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (res) {
+                    if(res.mensaje == "Exito"){
+                        $("#reservaExitosa").modal("show");
+                    }else{
+                        $("#errorReserva").modal("show");
+                    }
+                },
+                error: function(error){
+                    $("#errorReserva").modal("show");
+                }
+            });
+        });
+
+        function armarJson(){
+            var tipo_v = "";
+            var tipo_e = "";
+
+            var vehiculo1 = $("#tipo_vehiculo1").val();
+            var cantidad1 = $("#cantidad1").val();
+
+            var vehiculo2 = $("#tipo_vehiculo2").val();
+            var cantidad2 = $("#cantidad2").val();
+
+            var vehiculo3 = $("#tipo_vehiculo3").val();
+            var cantidad3 = $("#cantidad3").val();
+
+            var extra1 = $("#tipo_extra1").val();
+            var cantidad_extra1 = $("#cantidad_extra1").val();
+
+            var extra2 = $("#tipo_extra2").val();
+            var cantidad_extra2 = $("#cantidad_extra2").val();
+
+            var extra3 = $("#tipo_extra3").val();
+            var cantidad_extra3 = $("#cantidad_extra3").val();
+
+            var vehiculo = tiposVehiculos.find((x) => x.tipo === vehiculo1);
+            var extra;
+
+            tipo_v += vehiculo.id_vehiculo + "cx" + cantidad1;
+            if(vehiculo2 != "-"){
+                vehiculo = tiposVehiculos.find((x) => x.tipo === vehiculo2);
+                tipo_v += "/" + vehiculo.id_vehiculo + "mx" + cantidad2;
+            }
+            if (vehiculo3 != "-") {
+                vehiculo = tiposVehiculos.find((x) => x.tipo === vehiculo3);
+                tipo_v += "/" + vehiculo.id_vehiculo + "gx" + cantidad3;
+            }
+
+            if(extra1 != "Sin extra"){
+                extra = tiposExtras.find((x) => x.e_descripcion === extra1);
+                tipo_e += extra.e_descripcion + "x" + cantidad_extra1;
+            }
+            if(extra2 != "Sin extra"){
+                extra = tiposExtras.find((x) => x.e_descripcion === extra2);
+                tipo_e += "/" + extra.e_descripcion + "x" + cantidad_extra2;
+            }
+            if (extra3 != "Sin extra") {
+                extra = tiposExtras.find((x) => x.e_descripcion === extra3);
+                tipo_e += "/" + extra.e_descripcion + "x" + cantidad_extra3;
+            }
+
+
+            var data = {
+                fecha_mudanza: $("#fecha_mudanza").val(),
+                tipo_vehiculo: tipo_v,
+                extras: tipo_e,
+                direccion_partida: $("#calle_partida").val() + " Nro. "+$("#nro_partida").val(),
+                direccion_destino: $("#calle_destino").val() + " Nro. " + $("#nro_destino").val(),
+                total: totalFinal,
+                estado: "reservado",
+                dni: $("#dni").val()
+            };
+
+            return data;
+        }
+
+        $("#masInfo").on("click", function () {
+            $("#reservaExitosa").modal("hide");
+        });
+    });
+
+
+
+</script>
+

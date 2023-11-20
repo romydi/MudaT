@@ -21,12 +21,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Camion-Chico.jpg",
+      "PackagePath": "staticwebassets\\images\\Camion-Chico.jpg"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Camion-Grande.jpg",
+      "PackagePath": "staticwebassets\\images\\Camion-Grande.jpg"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Camion-Mediano.jpg",
+      "PackagePath": "staticwebassets\\images\\Camion-Mediano.jpg"
+    },
+    {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Fondo-MudaT-2.jpg",
       "PackagePath": "staticwebassets\\images\\Fondo-MudaT-2.jpg"
     },
     {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Fondo-MudarT.jpg",
       "PackagePath": "staticwebassets\\images\\Fondo-MudarT.jpg"
+    },
+    {
+      "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\Fondo-Reserva-banner.jpg",
+      "PackagePath": "staticwebassets\\images\\Fondo-Reserva-banner.jpg"
     },
     {
       "Id": "C:\\Users\\joaqu\\OneDrive\\Escritorio\\UTN\\Tecnicatura\\PP2\\MudaT\\MudaT\\wwwroot\\images\\FondoMudaT3.JPG",

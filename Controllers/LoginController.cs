@@ -12,11 +12,13 @@ namespace MudarT.Controllers
 
         public IActionResult Login()
         {
-            return View();
+			var ingresoFallido = false;
+			return View(ingresoFallido);
         }
 		public IActionResult Registrarse()
 		{
-			return View();
+			var ingresoFallido = false;
+			return View(ingresoFallido);
 		}
 
 
@@ -31,25 +33,34 @@ namespace MudarT.Controllers
             }
             else
             {
-                ViewData["Mensaje"] = "usuario o contraseña incorrectos";
-                return View();
+                var ingresoFallido = true;
+                return View("Login", ingresoFallido);
             }
-
         }
 
         [HttpPost]
         public IActionResult Registro(ModelUsuario usuario)
         {
-            var res = usuarioDatos.Guardar(usuario);
-            if (res)
+            if (usuario.email.Contains('@') && usuario.email.Contains('.') && usuario.contraseña.Length>=4 && usuario.nombre.Length>=2 && usuario.apellido.Length >= 2 && usuario.direccion.Length >= 2)
             {
-                return RedirectToAction("Login", "Login");
+				var res = usuarioDatos.Guardar(usuario);
+				if (res)
+				{
+					return RedirectToAction("Login", "Login");
+				}
+				else
+				{
+					var ingresoFallido = true;
+					return View("Registrarse", ingresoFallido);
+				}
             }
             else
             {
-                ViewData["Mensaje"] = "usuario o contraseña incorrectos";
-                return View();
-            }
+				var ingresoFallido = true;
+				return View("Registrarse", ingresoFallido);
+			}
+            
+            
         }
     }
 }
