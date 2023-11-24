@@ -5,6 +5,7 @@ using System.Diagnostics;
 using MudarT.Permisos;
 using MudarT.Datos;
 using System.Text.Json.Nodes;
+using Microsoft.Build.Framework;
 
 namespace MudarT.Controllers
 {
@@ -89,8 +90,31 @@ namespace MudarT.Controllers
         public IActionResult GuardarReserva([FromBody] ModelPedido pedido)
         {
             pedido.fecha_pedido = DateTime.Now.ToString("dd/MM/yyyy");
+            var vehiculos = pedido.tipo_vehiculo.Split('/');
+            var extras = pedido.extras.Split('/');
+
             try
             {
+                for (var i = 0; i < vehiculos.Length; i++)
+                {
+                    var idVehiculo = vehiculos[i].FirstOrDefault();
+                    var cantidad = int.Parse(vehiculos[i][3].ToString());
+                    var vehiculo = vehiculoDatos.Obtener(int.Parse(idVehiculo.ToString()));
+                    vehiculo.reservados += cantidad;
+                    vehiculoDatos.Editar(vehiculo);
+                }
+                if (extras[0] != "")
+                {
+                    for (var i = 0; i < extras.Length; i++)
+                    {
+                        var idExtra = extras[i].FirstOrDefault();
+                        var cantidad = int.Parse(extras[i][2].ToString());
+                        var extra = extrasDatos.Obtener(int.Parse(idExtra.ToString()));
+                        extra.e_cantidad = extra.e_cantidad - cantidad;
+                        extrasDatos.Editar(extra);
+                    }
+                }
+
                 var res = pedidoDatos.Guardar(pedido);
                 if (res)
                 {

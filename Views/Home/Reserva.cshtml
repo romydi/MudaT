@@ -726,15 +726,15 @@
 
             if(extra1 != "Sin extra"){
                 extra = tiposExtras.find((x) => x.e_descripcion === extra1);
-                tipo_e += extra.e_descripcion + "x" + cantidad_extra1;
+                tipo_e += extra.id_extras + "x" + cantidad_extra1;
             }
             if(extra2 != "Sin extra"){
                 extra = tiposExtras.find((x) => x.e_descripcion === extra2);
-                tipo_e += "/" + extra.e_descripcion + "x" + cantidad_extra2;
+                tipo_e += "/" + extra.id_extras + "x" + cantidad_extra2;
             }
             if (extra3 != "Sin extra") {
                 extra = tiposExtras.find((x) => x.e_descripcion === extra3);
-                tipo_e += "/" + extra.e_descripcion + "x" + cantidad_extra3;
+                tipo_e += "/" + extra.id_extras + "x" + cantidad_extra3;
             }
 
 
